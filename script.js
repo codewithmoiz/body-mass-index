@@ -1,24 +1,17 @@
 var btn = document.querySelector(".btn");
 
 btn.addEventListener("click", function() {
-    var heightInput = document.querySelector("#height").value;
+    var heightFeet = document.querySelector("#height").value;
     var weightInput = document.querySelector("#weight").value;
     var result = document.querySelector(".card-title");
     var text = document.querySelector(".card-text");
 
-    if (!isNaN(heightInput) && !isNaN(weightInput) && heightInput > 0 && weightInput > 0) {
-        var height = heightInput;
+    if (!isNaN(heightFeet) && !isNaN(weightInput) && heightFeet > 0 && weightInput > 0) {
+        var heightMeters = heightFeet * 0.3048;
+
         var weight = weightInput;
 
-        if (heightInput > 300) {
-            height = heightInput / 100;
-        }
-
-        if (weightInput > 500) {
-            weight = weightInput * 0.453592;
-        }
-
-        var bmi = weight / (height * height);
+        var bmi = weight / (heightMeters * heightMeters);
         result.textContent = bmi.toFixed(2);
 
         if (bmi < 19) {
@@ -30,6 +23,6 @@ btn.addEventListener("click", function() {
         }
     } else {
         result.textContent = "N/A";
-        text.textContent = "Please provide valid height and weight";
+        text.textContent = "Please provide valid height in feet and weight";
     }
 });
